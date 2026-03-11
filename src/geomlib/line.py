@@ -1,3 +1,4 @@
+from __future__ import annotations
 from geomlib.point import Point
 from geomlib.vector import Vector
 from geomlib.constants import EPS

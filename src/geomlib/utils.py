@@ -1,3 +1,4 @@
+from __future__ import annotations
 from geomlib.vector import Vector
 from geomlib.point import Point
 import numpy as np

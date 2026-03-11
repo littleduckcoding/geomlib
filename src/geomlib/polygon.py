@@ -1,3 +1,4 @@
+from __future__ import annotations
 from geomlib.point import Point
 import math
 
