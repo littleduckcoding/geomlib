@@ -1,10 +1,6 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
 import math
 from geomlib.constants import EPS
-
-if TYPE_CHECKING:
-    from geomlib.point import Point
 
 class Vector:
     __slots__ = ['x', 'y']
@@ -12,14 +8,6 @@ class Vector:
     def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
-
-    @staticmethod
-    def from_point(point: Point) -> 'Vector':
-        return Vector(point.x, point.y)
-
-    @staticmethod
-    def from_points(p1: Point, p2: Point) -> 'Vector':
-        return Vector(p2.x - p1.x, p2.y - p1.y)
     
     def magnitude(self) -> float:
         """

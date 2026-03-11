@@ -1,11 +1,7 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
 import math
 from geomlib.constants import EPS
-
-# avoid circular import
-if TYPE_CHECKING:
-    from geomlib.vector import Vector
+from geomlib.vector import Vector
 
 class Point:
     __slots__ = ["x", "y"]
