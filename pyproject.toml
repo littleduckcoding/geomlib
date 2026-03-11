@@ -21,6 +21,11 @@ dependencies = [
     "numpy>=1.25",
 ]
 
+[project.urls]
+Homepage = "https://github.com/littleduckcoding/geomlib"
+Repository = "https://github.com/littleduckcoding/geomlib"
+Issues = "https://github.com/littleduckcoding/geomlib/issues"
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
