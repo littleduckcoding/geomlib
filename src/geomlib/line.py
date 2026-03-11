@@ -91,6 +91,23 @@ class Line:
         """
         return abs(self.a * point.x + self.b * point.y + self.c) / math.hypot(self.a, self.b) < EPS
 
+    def find_reflection_point(self, point: Point) -> Point:
+        """
+        Find the reflection point of a point on the line.
+
+        :param point: The point to find the reflection point of.
+        :type point: Point
+        :return: The reflection point of the point on the line.
+        :rtype: Point
+        """
+        a, b, c = self.a, self.b, self.c
+        d = (a * point.x + b * point.y + c) / (a*a + b*b)
+
+        x = point.x - 2 * a * d
+        y = point.y - 2 * b * d
+
+        return Point(x, y)
+
     def __eq__(self, other):
         if not isinstance(other, Line):
             return NotImplemented

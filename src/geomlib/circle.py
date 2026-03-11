@@ -164,6 +164,36 @@ class Circle:
         """
         return self.center.distance_to(other.center) <= self.radius + other.radius + EPS
     
+    def find_inversion(self, point: Point) -> Point:
+        """
+        Find the inversion of a point in a circle.
+
+        The inversion of a point P in a circle centered at O with radius r is the point Q such that OQ = r^2 / OP.
+
+        Parameters
+        ----------
+        point : Point
+            The point to find the inversion of.
+
+        Returns
+        -------
+        Point or None
+            The inversion of the point, or None if the point is the center of the circle.
+        """
+        if abs(point.distance_to(self.center)) < EPS:
+            return None  # inversion of center is undefined
+
+        dx = point.x - self.center.x
+        dy = point.y - self.center.y
+
+        d2 = dx * dx + dy * dy
+        scale = (self.radius * self.radius) / d2
+
+        x = self.center.x + dx * scale
+        y = self.center.y + dy * scale
+
+        return Point(x, y)
+    
     def area(self) -> float:
         """
         Calculate the area of the circle.
