@@ -700,9 +700,9 @@ class Triangle:
         """
         self._check_degenerate()
 
-        a = self.C.distance_to(self.A)
-        b = self.A.distance_to(self.B)
-        c = self.B.distance_to(self.C)
+        a = self.B.distance_to(self.C)
+        b = self.C.distance_to(self.A)
+        c = self.A.distance_to(self.B)
         cosB = (a * a + c * c - b * b) / (2 * a * c)
         cosB = max(-1.0, min(1.0, cosB))
         return math.acos(cosB)
@@ -717,9 +717,9 @@ class Triangle:
         """
         self._check_degenerate()
 
-        a = self.A.distance_to(self.B)
-        b = self.B.distance_to(self.C)
-        c = self.C.distance_to(self.A)
+        a = self.B.distance_to(self.C)
+        b = self.C.distance_to(self.A)
+        c = self.A.distance_to(self.B)
         cosC = (a * a + b * b - c * c) / (2 * a * b)
         cosC = max(-1.0, min(1.0, cosC))
         return math.acos(cosC)
