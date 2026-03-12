@@ -48,7 +48,7 @@ class Point:
             return self.x * other.y - self.y * other.x
         return NotImplemented
     
-    def midpoint(self, other):
+    def midpoint(self, other) -> 'Point':
         """
         Calculate the midpoint between two points self and other.
 
@@ -57,7 +57,7 @@ class Point:
         :return: The midpoint between self and other.
         :rtype: Point
         """
-        return (self + other) / 2
+        return Point((self.x + other.x) / 2, (self.y + other.y) / 2)
     
     def norm(self):
         """
