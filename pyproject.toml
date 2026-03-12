@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "geomlib"
-version = "0.2.1"
+version = "0.2.2"
 description = "A computational geometry library for Python"
 readme = "README.md"
 authors = [{name="Victor Phung"}]

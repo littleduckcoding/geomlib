@@ -5,7 +5,7 @@ from geomlib.vector import Vector
 
 class CompositeMorph(Morph):
 
-    def __init__(self, *morphs):
+    def __init__(self, *morphs: Morph):
         self.morphs = morphs
 
     def apply_point(self, p: Point) -> Point:
