@@ -1,6 +1,7 @@
 from __future__ import annotations
 from geomlib.point import Point
 from geomlib.line import Line
+from geomlib.morph import Morph
 from geomlib.constants import EPS
 import math
 
@@ -12,6 +13,9 @@ class Circle:
             raise ValueError("Radius must be non-negative")
         self.center = center
         self.radius = radius
+
+    def transform(self, morph: Morph) -> Circle:
+        return Circle(self.center.transform(morph), self.radius)
 
     @staticmethod
     def from_points(p1: Point, p2: Point, p3: Point) -> 'Circle':

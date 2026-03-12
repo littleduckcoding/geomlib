@@ -2,6 +2,7 @@ from __future__ import annotations
 from geomlib.point import Point
 from geomlib.vector import Vector
 from geomlib.constants import EPS
+from geomlib.morph import Morph
 import math
 
 class Line:
@@ -14,6 +15,21 @@ class Line:
         self.a = p.y - q.y
         self.b = q.x - p.x
         self.c = p.x * q.y - q.x * p.y
+
+    def transform(self, morph: Morph) -> "Line":
+        denom = self.a*self.a + self.b*self.b
+
+        p = Point(
+            -self.a * self.c / denom,
+            -self.b * self.c / denom
+        )
+
+        v = self.get_direction_vector()
+
+        p2 = morph.apply_point(p)
+        v2 = morph.apply_vector(v)
+
+        return Line.from_point_and_direction_vector(p2, v2)
 
     @staticmethod
     def from_coeff(a: float, b: float, c: float) -> "Line":
@@ -29,6 +45,10 @@ class Line:
         b = n.y
         c = -(a * p.x + b * p.y)
         return Line.from_coeff(a, b, c)
+    
+    @staticmethod
+    def from_point_and_direction_vector(p: Point, u: Vector) -> "Line":
+        return Line.from_point_and_normal_vector(p, u.normal())
     
     def intersect(self, other: "Line") -> Point:
         """

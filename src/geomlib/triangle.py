@@ -6,6 +6,7 @@ from geomlib.point import Point
 from geomlib.circle import Circle
 from geomlib.line import Line
 from geomlib.constants import EPS
+from geomlib.morph import Morph
 
 class Triangle:
     __slots__ = ['A', 'B', 'C']
@@ -13,6 +14,9 @@ class Triangle:
         self.A = A
         self.B = B
         self.C = C
+
+    def transform(self, morph: Morph) -> Triangle:
+        return Triangle(self.A.transform(morph), self.B.transform(morph), self.C.transform(morph))
 
     def _check_degenerate(self):
         """
@@ -672,6 +676,87 @@ class Triangle:
         excenter_x = (CA * self.B.x - CB * self.A.x) / (CA - CB)
         excenter_y = (CA * self.B.y - CB * self.A.y) / (CA - CB)
         return Point(excenter_x, excenter_y)
+    
+    def exradius_A(self) -> float:
+        """
+        Compute the exradius of triangle ABC relative to vertex A.
+
+        The exradius of triangle ABC relative to vertex A is the radius of the excircle of triangle ABC relative to vertex A.
+
+        :return: The exradius of triangle ABC relative to vertex A.
+        :rtype: float
+        :raises ValueError: If points A, B, and C are the same, exradius is undefined.
+        """
+        S = self.area()
+        p = self.half_perimeter()
+        a = self.B.distance_to(self.C)
+        return S / (p - a)
+    
+    def exradius_B(self) -> float:
+        """
+        Compute the exradius of triangle ABC relative to vertex B.
+
+        The exradius of triangle ABC relative to vertex B is the radius of the excircle of triangle ABC relative to vertex B.
+
+        :return: The exradius of triangle ABC relative to vertex B.
+        :rtype: float
+        :raises ValueError: If points B, A, and C are the same, exradius is undefined.
+        """
+        S = self.area()
+        p = self.half_perimeter()
+        b = self.C.distance_to(self.A)
+        return S / (p - b)
+    
+    def exradius_C(self) -> float:
+        """
+        Compute the exradius of triangle ABC relative to vertex C.
+
+        The exradius of triangle ABC relative to vertex C is the radius of the excircle of triangle ABC relative to vertex C.
+
+        :return: The exradius of triangle ABC relative to vertex C.
+        :rtype: float
+        :raises ValueError: If points C, A, and B are the same, exradius is undefined.
+        """
+        S = self.area()
+        p = self.half_perimeter()
+        c = self.A.distance_to(self.B)
+        return S / (p - c)
+    
+    def excircle_A(self) -> Circle:
+        """
+        Compute the excircle of triangle ABC relative to vertex A.
+
+        The excircle of triangle ABC relative to vertex A is the circle that passes through the vertices B and C and the excenter of triangle ABC relative to vertex A.
+
+        :return: The excircle of triangle ABC relative to vertex A.
+        :rtype: Circle
+        :raises ValueError: If points A, B, and C are the same, excircle is undefined.
+        """
+        return Circle(self.excenter_A(), self.exradius_A())
+    
+    def excircle_B(self) -> Circle:
+        """
+        Compute the excircle of triangle ABC relative to vertex B.
+
+        The excircle of triangle ABC relative to vertex B is the circle that passes through the vertices A and C and the excenter of triangle ABC relative to vertex B.
+
+        :return: The excircle of triangle ABC relative to vertex B.
+        :rtype: Circle
+        :raises ValueError: If points B, A, and C are the same, excircle is undefined.
+        """
+        return Circle(self.excenter_B(), self.exradius_B())
+    
+    def excircle_C(self) -> Circle:
+        """
+        Compute the excircle of triangle ABC relative to vertex C.
+
+        The excircle of triangle ABC relative to vertex C is the circle that passes through the vertices A and B and the excenter of triangle ABC relative to vertex C.
+
+        :return: The excircle of triangle ABC relative to vertex C.
+        :rtype: Circle
+        :raises ValueError: If points C, A, and B are the same, excircle is undefined.
+        """
+        return Circle(self.excenter_C(), self.exradius_C())
 
     def angle_A(self) -> float:
         """

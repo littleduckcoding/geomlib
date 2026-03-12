@@ -1,6 +1,7 @@
 from __future__ import annotations
 import math
 from geomlib.constants import EPS
+from geomlib.morph import Morph
 
 class Vector:
     __slots__ = ['x', 'y']
@@ -9,6 +10,9 @@ class Vector:
         self.x = x
         self.y = y
     
+    def transform(self, morph: Morph) -> Vector:
+        return morph.apply_vector(self)
+
     def magnitude(self) -> float:
         """
         Calculate the magnitude (length) of the vector.

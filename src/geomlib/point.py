@@ -2,6 +2,7 @@ from __future__ import annotations
 import math
 from geomlib.constants import EPS
 from geomlib.vector import Vector
+from geomlib.morph import Morph
 
 class Point:
     __slots__ = ["x", "y"]
@@ -9,6 +10,9 @@ class Point:
     def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
+
+    def transform(self, morph: Morph) -> Point:
+        return morph.apply_point(self)
 
     def distance_to(self, other: 'Point') -> float:
         """

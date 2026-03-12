@@ -1,5 +1,6 @@
 from __future__ import annotations
 from geomlib.point import Point
+from geomlib.morph import Morph
 import math
 
 class Polygon:
@@ -7,6 +8,9 @@ class Polygon:
 
     def __init__(self, points: list[Point]):
         self.points = points
+
+    def transform(self, morph: Morph) -> Polygon:
+        return Polygon([p.transform(morph) for p in self.points])
 
     def convex_hull(self) -> 'Polygon':
         """

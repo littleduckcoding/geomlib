@@ -2,6 +2,7 @@ from __future__ import annotations
 from geomlib.point import Point
 from geomlib.vector import Vector
 from geomlib.constants import EPS
+from geomlib.morph import Morph
 
 class Segment:
     __slots__ = ['start', 'end']
@@ -9,6 +10,9 @@ class Segment:
     def __init__(self, start: Point, end: Point):
         self.start = start
         self.end = end
+
+    def transform(self, morph: Morph) -> Segment:
+        return Segment(self.start.transform(morph), self.end.transform(morph))
 
     def on_segment(self, p: Point) -> bool:
         """
